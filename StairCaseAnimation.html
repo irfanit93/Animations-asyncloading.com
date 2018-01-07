@@ -1,0 +1,95 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<!-- 
+Usage of this code has been Copyright by me(Ahamed Irfan) @ http://github.com/irfanit93
+Contact me at irfan@asyncloading.com for obtaining permission for usage of this code.
+Usage of this code without permission of me(Ahamed Irfan)(author of this code) is strictly prohibited.
+-->
+<meta name="viewport" content="width=device-width, initial-scale=1" user-scalable="no">
+<style>
+#stars
+{
+position:absolute;
+background:black;
+height:30px;
+width:30px;
+}
+#erroradjustment
+{
+position:absolute;
+height:100%;
+width:100%;
+left:0%;
+top:0%;
+}
+</style>
+</head>
+<body onclick="different()">
+<div id="erroradjustment">
+
+</div>
+<div id="stars">
+
+</div>
+<script>
+var boxes=document.getElementById("stars"),x=0,y=0,clearStar,isFinished="true";
+var widthDoc=parseFloat(getComputedStyle(document.getElementById("erroradjustment")).width);
+var heightDoc=parseFloat(getComputedStyle(document.getElementById("erroradjustment")).height);
+alert(widthDoc+" "+heightDoc);
+alert(widthDoc/4+" "+heightDoc/4);
+alert(Math.round(Math.random()*600)+" "+Math.round(Math.random()*600));
+function different()
+{
+if(isFinished=="true")
+{
+var x1=Math.round(Math.random()*(widthDoc/2));
+var y1=Math.round(Math.random()*(heightDoc/2));
+var starSpan;
+var length=0;
+x=0,y=0;
+//alert(x1+" "+y1);
+if(document.getElementsByClassName("stars")[0]!=undefined)
+{
+var i=0;
+starSpan=document.body.getElementsByClassName("stars");
+length=starSpan.length;
+//alert("Length: "+length);
+while(starSpan[0]!=undefined)
+starSpan[0].remove();
+}
+clearStar=setInterval(function(){
+isFinished="false";
+explode(x1,y1);
+},1);
+}
+}
+function explode(explodeDesignX,explodeDesignY)
+{
+boxes.style.left=x+"px";
+boxes.style.top=y+"px";
+var pathDiv=document.createElement("div");
+pathDiv.setAttribute("class","stars");
+pathDiv.setAttribute("style","display:inline-block;position:absolute;height:10px;width:3px;top:"+y+"px;left:"+x+"px;background:black;");
+document.body.appendChild(pathDiv);
+if(x%explodeDesignX!=0 && y%explodeDesignY==0|| x==0)
+{
+x+=1;
+}
+else if(x%explodeDesignX==0)
+{
+y+=1;
+if(y%explodeDesignY==0)
+{
+x+=1;
+}
+}
+if(x>=(widthDoc-30) || y>=(heightDoc-30))
+{
+isFinished="true";
+clearInterval(clearStar);
+}
+}
+</script>
+</body>
+</html>
